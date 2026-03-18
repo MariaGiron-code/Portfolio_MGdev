@@ -85,16 +85,30 @@ export function Header() {
           <Link
             href="#home"
             sx={{
-              fontSize: '1.5rem',
-              fontWeight: 700,
-              color: 'primary.main',
+              display: 'flex',
+              alignItems: 'center',
               textDecoration: 'none',
               '&:hover': {
                 opacity: 0.8,
               },
             }}
           >
-            MG
+            <Box
+              component="img"
+              src="/logo.svg"
+              alt="MG Logo"
+              sx={{
+                width: '52px',
+                height: '52px',
+                objectFit: 'contain',
+                transition: 'opacity 0.2s ease',
+                filter: (theme) =>
+                  theme.palette.mode === 'dark'
+                    ? 'invert(28%) sepia(89%) saturate(1200%) hue-rotate(258deg) brightness(90%)'
+                    : 'brightness(0)',
+                '&:hover': { opacity: 0.75 },
+              }}
+            />
           </Link>
 
           {/* Desktop Menu */}

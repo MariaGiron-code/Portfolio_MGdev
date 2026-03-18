@@ -54,20 +54,20 @@ export function Footer() {
             <Stack spacing={2}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
                 <Box
+                  component="img"
+                  src="/logo.svg"
+                  alt="MG Logo"
                   sx={{
-                    width: '40px',
-                    height: '40px',
-                    background: 'linear-gradient(135deg, #A34BE2 0%, #c084fc 100%)',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#ffffff',
+                    width: '56px',
+                    height: '56px',
+                    objectFit: 'contain',
                     flexShrink: 0,
+                    filter: (theme) =>
+                      theme.palette.mode === 'dark'
+                        ? 'invert(28%) sepia(89%) saturate(1200%) hue-rotate(258deg) brightness(90%)'
+                        : 'brightness(0)',
                   }}
-                >
-                  <CodeIcon sx={{ fontSize: '1.1rem' }} />
-                </Box>
+                />
                 <Typography sx={{ fontWeight: 700, color: 'text.primary', fontSize: '1rem' }}>
                   mg.dev
                 </Typography>
