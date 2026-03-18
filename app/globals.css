@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+:root {
+  /* Primary Colors */
+  --primary: #A34BE2;
+  --primary-light: #c084fc;
+  --primary-dark: #9333ea;
+  
+  /* Dark Mode (DEFAULT) */
+  --background: #0f0f14;
+  --background-secondary: #1a1a1f;
+  --surface: #1a1a1f;
+  --surface-hover: #2a2a35;
+  
+  /* Light Mode */
+  --background-light: #f5f3f0;
+  --surface-light: #ffffff;
+  --surface-light-hover: #f9f7f5;
+  
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-light: #1a1a1a;
+  --text-secondary-light: #666666;
+  
+  /* Borders */
+  --border: #2a2a35;
+  --border-light: #d4d4d4;
+  
+  /* Accents */
+  --hover: #c084fc;
+  --hover-light: #8b5cf6;
+  --success: #10b981;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+  
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  
+  --color-border: var(--border);
+  --color-success: var(--success);
+  
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, 'Helvetica Neue', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode */
+html.light {
+  color-scheme: light;
+}
+
+html.light body {
+  background-color: var(--background-light);
+  color: var(--text-light);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--hover);
+}
+
+html.light a:hover {
+  color: var(--hover-light);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar { 
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: var(--background-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
