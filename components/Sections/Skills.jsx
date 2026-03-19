@@ -128,8 +128,8 @@ export function Skills() {
 
           {/* Skills Grid */}
           <Grid container spacing={2}>
-            {skillsData[activeTab].map((skill, index) => (
-              <Grid item xs={6} sm={4} md={3} lg={2} key={index}>
+            {skillsData[activeTab].map((skill) => (
+              <Grid item xs={6} sm={4} md={3} lg={2} key={skill.name}>
                 <SkillCard
                   name={skill.name}
                   icon={skill.icon}

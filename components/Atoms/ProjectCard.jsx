@@ -153,9 +153,9 @@ export function ProjectCard({
         {/* Technologies */}
         {technologies && (
           <Stack direction="row" sx={{ flexWrap: 'wrap', gap: 0.75 }}>
-            {technologies.map((tech, idx) => (
+            {technologies.map((tech) => (
               <Chip
-                key={idx}
+                key={tech}
                 label={tech}
                 size="small"
                 sx={{

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -20,28 +20,46 @@ const TYPE_SPEED = 80;
 const DELETE_SPEED = 50;
 const PAUSE_MS = 1800;
 
+const initialTypewriterState = {
+  displayed: '',
+  roleIdx: 0,
+  isDeleting: false,
+};
+
+function typewriterReducer(state, action) {
+  const current = ROLES[state.roleIdx];
+  switch (action.type) {
+    case 'TYPE':
+      return { ...state, displayed: current.slice(0, state.displayed.length + 1) };
+    case 'START_DELETE':
+      return { ...state, isDeleting: true };
+    case 'DELETE':
+      return { ...state, displayed: current.slice(0, state.displayed.length - 1) };
+    case 'NEXT_ROLE':
+      return { displayed: '', roleIdx: (state.roleIdx + 1) % ROLES.length, isDeleting: false };
+    default:
+      return state;
+  }
+}
+
 function TypewriterRole() {
-  const [displayed, setDisplayed] = useState('');
-  const [roleIdx, setRoleIdx] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [state, dispatch] = useReducer(typewriterReducer, initialTypewriterState);
+  const { displayed, roleIdx, isDeleting } = state;
+  const current = ROLES[roleIdx];
 
   useEffect(() => {
-    const current = ROLES[roleIdx];
     let timeout;
-
     if (!isDeleting && displayed.length < current.length) {
-      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length + 1)), TYPE_SPEED);
+      timeout = setTimeout(() => dispatch({ type: 'TYPE' }), TYPE_SPEED);
     } else if (!isDeleting && displayed.length === current.length) {
-      timeout = setTimeout(() => setIsDeleting(true), PAUSE_MS);
+      timeout = setTimeout(() => dispatch({ type: 'START_DELETE' }), PAUSE_MS);
     } else if (isDeleting && displayed.length > 0) {
-      timeout = setTimeout(() => setDisplayed(current.slice(0, displayed.length - 1)), DELETE_SPEED);
+      timeout = setTimeout(() => dispatch({ type: 'DELETE' }), DELETE_SPEED);
     } else if (isDeleting && displayed.length === 0) {
-      setIsDeleting(false);
-      setRoleIdx((prev) => (prev + 1) % ROLES.length);
+      dispatch({ type: 'NEXT_ROLE' });
     }
-
     return () => clearTimeout(timeout);
-  }, [displayed, isDeleting, roleIdx]);
+  }, [displayed, isDeleting, current]);
 
   return (
     <Box

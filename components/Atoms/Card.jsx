@@ -2,7 +2,9 @@
 
 import Box from '@mui/material/Box';
 
-export function Card({ children, sx = {}, ...props }) {
+const EMPTY_SX = {};
+
+export function Card({ children, sx = EMPTY_SX, ...props }) {
   return (
     <Box
       sx={{

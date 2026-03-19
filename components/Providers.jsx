@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useTheme } from 'next-themes';
@@ -8,14 +8,9 @@ import themeConfig from '@/theme/mui-theme';
 
 export function Providers({ children }) {
   const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const muiTheme = useMemo(() => {
-    const isDark = mounted ? resolvedTheme === 'dark' : true;
+    const isDark = resolvedTheme !== 'light';
     const palette = isDark
       ? themeConfig.colorSchemes.dark.palette
       : themeConfig.colorSchemes.light.palette;
@@ -28,12 +23,12 @@ export function Providers({ children }) {
       typography: themeConfig.typography,
       shape: themeConfig.shape,
     });
-  }, [resolvedTheme, mounted]);
+  }, [resolvedTheme]);
 
   return (
     <ThemeProvider theme={muiTheme}>
       <CssBaseline />
-      {children}
+      <div suppressHydrationWarning>{children}</div>
     </ThemeProvider>
   );
 }

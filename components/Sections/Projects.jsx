@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -71,10 +71,6 @@ export function Projects() {
       ? projectsMeta
       : projectsMeta.filter((p) => p.category === activeFilter);
 
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [activeFilter]);
-
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? filteredProjects.length - 1 : prev - 1));
   };
@@ -125,6 +121,7 @@ export function Projects() {
           {/* Carousel */}
           <Box sx={{ position: 'relative' }}>
             <Box
+              key={activeFilter}
               ref={carouselRef}
               sx={{
                 display: 'flex',

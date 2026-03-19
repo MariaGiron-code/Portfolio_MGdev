@@ -56,9 +56,7 @@ export function Contact() {
     { icon: GitHubIcon, label: 'GitHub', href: 'https://github.com' },
     { icon: LinkedInIcon, label: 'LinkedIn', href: 'https://linkedin.com' },
     { icon: WhatsAppIcon, label: 'WhatsApp', href: 'https://wa.me/525551234567' },
-  ];
-
-  return (
+  ];  return (
     <Box
       id="contact"
       component="section"
@@ -213,11 +211,11 @@ export function Contact() {
                     {t('contact.networks')}
                   </Typography>
                   <Stack direction="row" spacing={1.5}>
-                    {socialLinks.map((social, index) => {
+                    {socialLinks.map((social) => {
                       const Icon = social.icon;
                       return (
                         <IconButton
-                          key={index}
+                          key={social.label}
                           component="a"
                           href={social.href}
                           target="_blank"

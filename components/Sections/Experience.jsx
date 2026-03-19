@@ -114,9 +114,9 @@ function ExperienceCard({ item }) {
 
         {/* Technologies */}
         <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap', gap: 1, mb: 3 }}>
-          {item.technologies.map((tech, idx) => (
+          {item.technologies.map((tech) => (
             <Chip
-              key={idx}
+              key={tech}
               label={tech}
               size="small"
               sx={{
@@ -173,8 +173,8 @@ function ExperienceCard({ item }) {
               {t('experience.achievements')}
             </Typography>
             <Stack spacing={1.5}>
-              {jobData.achievements.map((achievement, idx) => (
-                <Box key={idx} sx={{ display: 'flex', gap: 1.5 }}>
+              {jobData.achievements.map((achievement) => (
+                <Box key={achievement} sx={{ display: 'flex', gap: 1.5 }}>
                   <Box
                     sx={{
                       color: 'primary.main',
@@ -249,8 +249,8 @@ export function Experience() {
 
         {/* Experience Items */}
         <Box>
-          {experienceData.map((item, index) => (
-            <ExperienceCard key={index} item={item} />
+          {experienceData.map((item) => (
+            <ExperienceCard key={item.key} item={item} />
           ))}
         </Box>
       </Box>

@@ -1,29 +1,20 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 export function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <div style={{ width: 40, height: 40 }} />;
-  }
-
-  const isDark = theme === 'dark';
+  const isDark = resolvedTheme === 'dark';
 
   return (
     <Tooltip title={isDark ? 'Modo claro' : 'Modo oscuro'}>
       <IconButton
+        suppressHydrationWarning
         onClick={() => setTheme(isDark ? 'light' : 'dark')}
         sx={{
           color: 'primary.main',
