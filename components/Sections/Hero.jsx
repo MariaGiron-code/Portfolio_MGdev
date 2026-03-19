@@ -101,12 +101,12 @@ export function Hero() {
           <Grid item xs={12} md={6}>
             <Stack spacing={3}>
               <Box>
-                <Badge label="● Disponible para proyectos" variant="ghost" size="sm" />
+                <Badge label={t('hero.available')} variant="ghost" size="sm" />
               </Box>
 
               <Box>
                 <Typography sx={{ color: 'text.secondary', fontSize: '0.95rem', fontWeight: 400 }}>
-                  Hola, soy
+                  {t('hero.greeting')}
                 </Typography>
               </Box>
 
@@ -133,7 +133,7 @@ export function Hero() {
                   maxWidth: '500px',
                 }}
               >
-                Construyo aplicaciones web escalables y APIs robustas. Especializada en arquitecturas modernas con React, Node.js y servicios en la nube.
+                {t('hero.description')}
               </Typography>
 
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
@@ -154,7 +154,7 @@ export function Hero() {
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  Contact me
+                  {t('hero.contactMe')}
                 </Button>
                 <Button
                   variant="outlined"
@@ -172,7 +172,7 @@ export function Hero() {
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  View projects
+                  {t('hero.viewProjects')}
                 </Button>
                 <Button
                   variant="outlined"
@@ -190,7 +190,7 @@ export function Hero() {
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  CV
+                  {t('hero.downloadCV')}
                 </Button>
               </Stack>
 

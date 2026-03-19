@@ -148,11 +148,8 @@ export function Footer() {
             spacing={2}
             sx={{ justifyContent: 'space-between', alignItems: 'center' }}
           >
-            <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem' }}>
+            <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem'}}>
               © {currentYear} María Girón · {t('footer.copyright')}.
-            </Typography>
-            <Typography sx={{ color: 'text.secondary', fontSize: '0.85rem' }}>
-              {t('footer.madeWith')} <Box component="span" sx={{ color: 'error.main' }}>❤</Box> {t('footer.inEcuador')} · React + Next.js
             </Typography>
           </Stack>
         </Stack>
