@@ -1,21 +1,27 @@
 'use client';
 
 import { useTheme } from 'next-themes';
+import { useState, useEffect } from 'react';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 export function ThemeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const isDark = resolvedTheme === 'dark';
 
   return (
-    <Tooltip title={isDark ? 'Modo claro' : 'Modo oscuro'}>
+    <Tooltip title={mounted ? (isDark ? 'Modo claro' : 'Modo oscuro') : ''}>
       <IconButton
-        suppressHydrationWarning
         onClick={() => setTheme(isDark ? 'light' : 'dark')}
+        aria-label="toggle theme"
         sx={{
           color: 'primary.main',
           '&:hover': {
@@ -23,7 +29,8 @@ export function ThemeToggle() {
           },
         }}
       >
-        {isDark ? <LightModeIcon /> : <DarkModeIcon />}
+        {/* Render same icon on server and client until mounted to avoid hydration mismatch */}
+        {!mounted || isDark ? <LightModeIcon /> : <DarkModeIcon />}
       </IconButton>
     </Tooltip>
   );

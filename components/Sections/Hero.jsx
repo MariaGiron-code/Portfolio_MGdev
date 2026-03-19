@@ -13,7 +13,7 @@ import CloudDownloadIcon from '@mui/icons-material/CloudDownload';
 import EmailIcon from '@mui/icons-material/Email';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import { Badge, KPIBlock } from '@/components/Atoms';
+import { Badge } from '@/components/Atoms';
 
 const ROLES = ['Full Stack Junior Developer', 'React Developer', 'Node.js'];
 const TYPE_SPEED = 80;
@@ -237,19 +237,6 @@ export function Hero() {
                   </IconButton>
                 ))}
               </Stack>
-
-              {/* KPIs */}
-              <Grid container spacing={2} sx={{ mt: 1 }}>
-                <Grid item xs={6} sm={4}>
-                  <KPIBlock value="+5" label="YRS EXP." />
-                </Grid>
-                <Grid item xs={6} sm={4}>
-                  <KPIBlock value="30+" label="PROJECTS" />
-                </Grid>
-                <Grid item xs={6} sm={4}>
-                  <KPIBlock value="12+" label="CLIENTS" />
-                </Grid>
-              </Grid>
             </Stack>
           </Grid>
 
