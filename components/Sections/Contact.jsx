@@ -55,7 +55,7 @@ export function Contact() {
   const socialLinks = [
     { icon: GitHubIcon, label: 'GitHub', href: 'https://github.com' },
     { icon: LinkedInIcon, label: 'LinkedIn', href: 'https://linkedin.com' },
-    { icon: WhatsAppIcon, label: 'WhatsApp', href: 'https://wa.me/525551234567' },
+    { icon: WhatsAppIcon, label: 'WhatsApp', href: 'https://wa.me/593960702845' },
   ];  return (
     <Box
       id="contact"
