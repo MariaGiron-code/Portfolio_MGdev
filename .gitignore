@@ -26,6 +26,9 @@ npm-debug.log*
 # Vercel
 .vercel
 
+# Kiro
+.kiro/
+
 # IDEs
 .vscode/
 .idea/
