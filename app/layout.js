@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
 import './globals.css';
 import { Providers } from '@/components/Providers';
+import { EmotionCacheProvider } from '@/components/EmotionCacheProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -15,7 +16,6 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-// RootLayout es el layout principal que envuelve toda la aplicación. Aquí se configuran las fuentes, el tema y se incluyen los proveedores necesarios para la aplicación.
 export default function RootLayout({ children }) {
   return (
     <html lang="es" suppressHydrationWarning>
@@ -30,11 +30,13 @@ export default function RootLayout({ children }) {
         <meta name="description" content="Portfolio de María Girón, Desarrolladora Full-Stack especializada en arquitectura de APIs y aplicaciones web escalables." />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange storageKey="portfolio-theme">
-          <Providers>
-            {children}
-          </Providers>
-        </ThemeProvider>
+        <EmotionCacheProvider>
+          <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange storageKey="portfolio-theme">
+            <Providers>
+              {children}
+            </Providers>
+          </ThemeProvider>
+        </EmotionCacheProvider>
       </body>
     </html>
   );

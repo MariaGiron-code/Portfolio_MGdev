@@ -102,10 +102,12 @@ export function Header() {
                 height: '52px',
                 objectFit: 'contain',
                 transition: 'opacity 0.2s ease',
-                filter: (theme) =>
-                  theme.palette.mode === 'dark'
-                    ? 'invert(28%) sepia(89%) saturate(1200%) hue-rotate(258deg) brightness(90%)'
-                    : 'brightness(0)',
+                '[data-theme="dark"] &, .dark &': {
+                  filter: 'invert(28%) sepia(89%) saturate(1200%) hue-rotate(258deg) brightness(90%)',
+                },
+                '[data-theme="light"] &, .light &': {
+                  filter: 'brightness(0)',
+                },
                 '&:hover': { opacity: 0.75 },
               }}
             />
