@@ -1,4 +1,4 @@
-import connectDB from '@/lib/db'
+import { connectDB } from '@/lib/db'
 import { withErrorHandler } from '@/lib/utils/errors'
 import { successResponse, errorResponse } from '@/lib/utils/response'
 import { getAllExperience, createExperience } from '@/lib/services/experience.service'

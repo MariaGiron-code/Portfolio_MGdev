@@ -1,4 +1,4 @@
-import connectDB from '@/lib/db'
+import { connectDB } from '@/lib/db'
 import { withErrorHandler } from '@/lib/utils/errors'
 import { successResponse, errorResponse } from '@/lib/utils/response'
 import { saveContactMessage } from '@/lib/services/contact.service'
