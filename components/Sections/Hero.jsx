@@ -14,6 +14,9 @@ import EmailIcon from '@mui/icons-material/Email';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Badge } from '@/components/Atoms';
+import Skeleton from '@mui/material/Skeleton';
+import { useFetch } from '../hooks/useFetch';
+
 
 const ROLES = ['Full Stack Junior Developer', 'React Developer', 'Node.js'];
 const TYPE_SPEED = 80;
@@ -25,6 +28,14 @@ const initialTypewriterState = {
   roleIdx: 0,
   isDeleting: false,
 };
+
+const PROFILE_FALLBACK = {
+  name: 'María Girón',
+  email: 'marygdev22@gmail.com',
+  githubUrl: 'https://github.com/MariaGiron-code',
+  linkedinUrl: 'https://www.linkedin.com/in/maria-girón-671920207',
+  cvUrl: null,
+}
 
 function typewriterReducer(state, action) {
   const current = ROLES[state.roleIdx];
@@ -95,6 +106,8 @@ function TypewriterRole() {
 
 export function Hero() {
   const { t } = useTranslation();
+  const { data, loading, error } = useFetch('/api/profile')
+  const profile = error !== null ? PROFILE_FALLBACK : (data ?? PROFILE_FALLBACK)
 
   const scrollToSection = (sectionId) => {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
@@ -127,7 +140,10 @@ export function Hero() {
                   {t('hero.greeting')}
                 </Typography>
               </Box>
-
+              
+              {loading ? (
+                <Skeleton variant="text" width={300} height={60}/>
+              ) : (
               <Typography
                 component="h1"
                 sx={{
@@ -138,8 +154,9 @@ export function Hero() {
                   mt: '0 !important',
                 }}
               >
-                María Girón
+                {profile.name}
               </Typography>
+              )}
 
               <TypewriterRole />
 
@@ -154,6 +171,12 @@ export function Hero() {
                 {t('hero.description')}
               </Typography>
 
+              {loading ? (
+                <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+                  <Skeleton variant="rounded" width={160} height={48} />
+                  <Skeleton variant="rounded" width={160} height={48} />
+                </Stack>
+              ) : (
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
                 <Button
                   variant="contained"
@@ -192,8 +215,13 @@ export function Hero() {
                 >
                   {t('hero.viewProjects')}
                 </Button>
+
+                {profile.cvUrl && (
                 <Button
                   variant="outlined"
+                  component="a"
+                  href={profile.cvUrl}
+                  target="_blank"
                   startIcon={<CloudDownloadIcon />}
                   sx={{
                     borderColor: 'divider',
@@ -210,14 +238,16 @@ export function Hero() {
                 >
                   {t('hero.downloadCV')}
                 </Button>
+                )}
               </Stack>
+              )}
 
               {/* Social Icons */}
               <Stack direction="row" spacing={1.5}>
                 {[
-                  { icon: GitHubIcon, href: 'https://github.com/MariaGiron-code' },
-                  { icon: LinkedInIcon, href: 'https://www.linkedin.com/in/%20maria-gir%C3%B3n-671920207' },
-                  { icon: EmailIcon, href: 'mailto:marygdev22@gmail.com' },
+                  { icon: GitHubIcon, href: profile.githubUrl },
+                  { icon: LinkedInIcon, href: profile.linkedinUrl },
+                  { icon: EmailIcon, href: `mailto:${profile.email}` },
                 ].map(({ icon: Icon, href }, i) => (
                   <IconButton
                     key={i}
