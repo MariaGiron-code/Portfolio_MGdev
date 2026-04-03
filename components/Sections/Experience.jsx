@@ -27,6 +27,9 @@ function ExperienceCard({ item }) {
 
   const jobData = t(`experience.jobs.${item.key}`, { returnObjects: true });
 
+  // Guard: if i18n not ready yet, jobData may be a string
+  if (!jobData || typeof jobData !== 'object') return null;
+
   return (
     <Box
       sx={{
