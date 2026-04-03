@@ -18,14 +18,13 @@ export function useFetch(url){
             if (!json.success) throw new Error(json.error || 'Error desconocido')
             setData(json.data)
         })
-
         .catch(err => {
             if(err.name !== 'AbortError') setError(err.message)
         })
         .finally(() => setLoading(false))
      
-    return () => controller.abort() 
-   }, [url])
+        return () => controller.abort() 
+    }, [url])
 
     return {data, loading, error }
 }

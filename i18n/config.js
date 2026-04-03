@@ -1,6 +1,5 @@
 import { initReactI18next } from 'react-i18next';
 import i18next from 'i18next';
-import resourcesToBackend from 'i18next-resources-to-backend';
 
 const resources = {
   es: {
@@ -287,13 +286,17 @@ const resources = {
   },
 };
 
-i18next.use(initReactI18next).init({
-  resources,
-  lng: 'es',
-  fallbackLng: 'en',
-  interpolation: {
-    escapeValue: false,
-  },
-});
+// Initialize i18next synchronously — must run before any component uses useTranslation
+if (!i18next.isInitialized) {
+  i18next.use(initReactI18next).init({
+    resources,
+    lng: 'es',
+    fallbackLng: 'en',
+    interpolation: {
+      escapeValue: false,
+    },
+    initImmediate: false, // force synchronous init
+  });
+}
 
 export default i18next;
